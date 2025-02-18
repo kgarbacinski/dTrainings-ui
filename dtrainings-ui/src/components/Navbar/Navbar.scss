@@ -1,0 +1,71 @@
+// Navbar.scss
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #0d0d0d; // Dark background for a sleek look
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  // Buttons CTA
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  // Brand/Logo
+  &__brand {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  // Navigation Links
+  &__nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    &-item {
+      margin: 0 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #1e90ff; // Highlight color on hover
+      }
+    }
+  }
+
+  // Wallet Button Container
+  &__wallet-btn {
+    // You can adjust the positioning and margins as needed
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__nav {
+      flex-direction: column;
+      width: 100%;
+
+      &-item {
+        margin: 0.5rem 0;
+      }
+    }
+
+    &__wallet-btn {
+      align-self: center;
+      margin-top: 1rem;
+    }
+  }
+}
