@@ -1,0 +1,100 @@
+.trainings-container {
+  padding: 2rem;
+  background-color: #1a1a1a; // Dark background
+  color: #fff;
+  min-height: 100vh;
+
+  .trainings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    p {
+      font-size: 1.8rem;
+    }
+
+    .create-training-btn {
+      background: linear-gradient(45deg, #1e90ff, #00bfff);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(30, 144, 255, 0.4);
+      }
+    }
+  }
+
+  .no-trainings {
+    text-align: center;
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #ccc;
+    }
+  }
+
+  .trainings-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .training-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default; // or pointer if you want the whole card clickable
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    h3 {
+      margin: 0 0 0.5rem;
+      color: #fff;
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background-color: #333;
+      color: #fff;
+      padding: 0.3rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .delete-btn {
+      background-color: #ff4d4d;
+      border: none;
+      border-radius: 20px;
+      color: #fff;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.4);
+      }
+    }
+  }
+}

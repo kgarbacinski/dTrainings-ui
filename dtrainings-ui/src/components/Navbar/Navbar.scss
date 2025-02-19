@@ -37,6 +37,15 @@
       &:hover {
         color: #1e90ff; // Highlight color on hover
       }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          color: #1e90ff;
+        }
+      }
     }
   }
 
