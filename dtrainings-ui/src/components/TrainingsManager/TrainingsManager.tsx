@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TrainingsManager.scss';
+import useAddTraining from "../../hooks/mutations/useAddTraining";
 
 const TrainingsManager = () => {
     const [trainings, setTrainings] = useState([
@@ -17,9 +18,13 @@ const TrainingsManager = () => {
         },
     ]);
 
-    const handleCreate = () => {
-        alert('Create Training clicked (implement your own logic here).');
+    const onError = (error: any) => {
+        console.error('Error adding training:', error);
     };
+    const onSuccess = (data: any) => {
+        console.log('Training added successfully:', data);
+    }
+    const addTrainingMutation = useAddTraining({ onError, onSuccess });
 
     const handleDelete = (id: number) => {
         setTrainings((prev) => prev.filter((t) => t.id !== id));
@@ -29,7 +34,7 @@ const TrainingsManager = () => {
         <div className="trainings-container">
             <div className="trainings-header">
                 <h1>Trainings</h1>
-                <button onClick={handleCreate} className="create-training-btn">
+                <button onClick={() => addTrainingMutation.mutateAsync({ name: "Test", description: "Test", duration: BigInt(10) })} className="create-training-btn">
                     Create Training +
                 </button>
             </div>

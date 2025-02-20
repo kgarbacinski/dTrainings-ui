@@ -1,6 +1,6 @@
 import './Navbar.scss';
 import WalletButton from "../Wallet/WalletButton";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import './WalletButton.scss';
-import {useDisconnect} from "wagmi";
+import { useDisconnect } from "wagmi";
 
 const WalletButton = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -9,17 +9,17 @@ const WalletButton = () => {
     const handleModalOpen = () => setModalOpen(true);
     const handleModalClose = () => setModalOpen(false);
 
-    const { disconnect} = useDisconnect();
+    const { disconnect } = useDisconnect();
 
     return (
         <ConnectButton.Custom>
             {({
-                  account,
-                  chain,
-                  openConnectModal,
-                  authenticationStatus,
-                  mounted,
-              }) => {
+                account,
+                chain,
+                openConnectModal,
+                authenticationStatus,
+                mounted,
+            }) => {
                 // If not mounted or not connected, show the connect wallet button.
                 if (!mounted || authenticationStatus === 'loading' || !account || !chain) {
                     return (

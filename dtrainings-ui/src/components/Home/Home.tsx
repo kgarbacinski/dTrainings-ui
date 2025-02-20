@@ -1,6 +1,6 @@
 import Navbar from "../Navbar/Navbar";
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Home.scss";
 
 const Home = () => {

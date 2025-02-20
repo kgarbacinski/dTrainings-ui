@@ -1,0 +1,241 @@
+{
+  "abi": [
+    {
+      "type": "function",
+      "name": "addTraining",
+      "inputs": [
+        {
+          "name": "trainingInfo",
+          "type": "tuple",
+          "internalType": "struct ITrainingsManager.TrainingInfo",
+          "components": [
+            {
+              "name": "name",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "description",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "durationInMinutes",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "trainings",
+      "inputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "name",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "description",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "durationInMinutes",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "TrainingCreated",
+      "inputs": [
+        {
+          "name": "name",
+          "type": "bytes32",
+          "indexed": false,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "creator",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052348015600e575f80fd5b506101be8061001c5f395ff3fe608060405234801561000f575f80fd5b5060043610610034575f3560e01c80635898d01814610038578063f1e823e21461006a575b5f80fd5b61004b61004636600461013d565b61007f565b6040805193845260208401929092529082015260600160405180910390f35b61007d610078366004610172565b6100bc565b005b5f602052815f5260405f208181548110610097575f80fd5b5f91825260209091206003909102018054600182015460029092015490935090915083565b335f818152602081815260408220805460018101825590835291208391600302016100fe82828135815560208201356001820155604082013560028201555050565b505060408051833581523360208201527f1e80e483f7da92147f26155e4c7fe167b8f08b8f9839de4b5fe9bab652f68c13910160405180910390a15050565b5f806040838503121561014e575f80fd5b82356001600160a01b0381168114610164575f80fd5b946020939093013593505050565b5f60608284031215610182575f80fd5b5091905056fea26469706673582212203a11a025ac0e1370bb0ede4f947927490805a533cab9e3e628fd447108a8d8ec64736f6c63430008190033",
+    "sourceMap": "125:344:16:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561000f575f80fd5b5060043610610034575f3560e01c80635898d01814610038578063f1e823e21461006a575b5f80fd5b61004b61004636600461013d565b61007f565b6040805193845260208401929092529082015260600160405180910390f35b61007d610078366004610172565b6100bc565b005b5f602052815f5260405f208181548110610097575f80fd5b5f91825260209091206003909102018054600182015460029092015490935090915083565b335f818152602081815260408220805460018101825590835291208391600302016100fe82828135815560208201356001820155604082013560028201555050565b505060408051833581523360208201527f1e80e483f7da92147f26155e4c7fe167b8f08b8f9839de4b5fe9bab652f68c13910160405180910390a15050565b5f806040838503121561014e575f80fd5b82356001600160a01b0381168114610164575f80fd5b946020939093013593505050565b5f60608284031215610182575f80fd5b5091905056fea26469706673582212203a11a025ac0e1370bb0ede4f947927490805a533cab9e3e628fd447108a8d8ec64736f6c63430008190033",
+    "sourceMap": "125:344:16:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;295:51:15;;;;;;:::i;:::-;;:::i;:::-;;;;575:25:17;;;631:2;616:18;;609:34;;;;659:18;;;652:34;563:2;548:18;295:51:15;;;;;;;237:230:16;;;;;;:::i;:::-;;:::i;:::-;;295:51:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;295:51:15;;-1:-1:-1;295:51:15;:::o;237:230:16:-;340:10;322:15;361:18;;;;;;;;;;:37;;;;;;;;;;;;385:12;;361:37;;;;385:12;361:37;1076:5:17;1063:19;1057:4;1050:33;1137:2;1130:5;1126:14;1113:28;1109:1;1103:4;1099:12;1092:50;1196:2;1189:5;1185:14;1172:28;1168:1;1162:4;1158:12;1151:50;;;901:306;361:37:16;-1:-1:-1;;414:46:16;;;430:17;;1386:25:17;;449:10:16;1442:2:17;1427:18;;1420:60;414:46:16;;1359:18:17;414:46:16;;;;;;;312:155;237:230;:::o;14:354:17:-;82:6;90;143:2;131:9;122:7;118:23;114:32;111:52;;;159:1;156;149:12;111:52;185:23;;-1:-1:-1;;;;;237:31:17;;227:42;;217:70;;283:1;280;273:12;217:70;306:5;358:2;343:18;;;;330:32;;-1:-1:-1;;;14:354:17:o;697:199::-;789:6;842:2;830:9;821:7;817:23;813:32;810:52;;;858:1;855;848:12;810:52;-1:-1:-1;881:9:17;697:199;-1:-1:-1;697:199:17:o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "addTraining((bytes32,bytes32,uint256))": "f1e823e2",
+    "trainings(address,uint256)": "5898d018"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"}],\"name\":\"TrainingCreated\",\"type\":\"event\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"description\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"durationInMinutes\",\"type\":\"uint256\"}],\"internalType\":\"struct ITrainingsManager.TrainingInfo\",\"name\":\"trainingInfo\",\"type\":\"tuple\"}],\"name\":\"addTraining\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"trainings\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"description\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"durationInMinutes\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/trainings/TrainingsManager.sol\":\"TrainingsManager\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":forge-std/=lib/forge-std/src/\"]},\"sources\":{\"src/trainings/ITrainingsManager.sol\":{\"keccak256\":\"0x234f285da1d5d1ba3457219ae3b5516628b62ea1a24ca3d4e8b17d9fa4d6d382\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://077b2fb141d57cd6e6d17afbda5a9fc2e4eca99ce6d0dc0fe93ca8523428a575\",\"dweb:/ipfs/QmetyNNUhcF3u5AKPBRC3n9zpg5A34r9ps5avXifkkpojw\"]},\"src/trainings/TrainingsManager.sol\":{\"keccak256\":\"0x2c670ae2b03a4637b7908d58193c5dc122b2e78117599c21c04bca4d8a589343\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://5f40de5b7ca66310b64931dace6f1728082ec1b51fd5a502f52a528430851a98\",\"dweb:/ipfs/QmQqssmmtGH7SPUg56dp5ZD4jSrFMD3y5uVFsUEhrdgZUP\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.25+commit.b61c2a91"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "name",
+              "type": "bytes32",
+              "indexed": false
+            },
+            {
+              "internalType": "address",
+              "name": "creator",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "TrainingCreated",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct ITrainingsManager.TrainingInfo",
+              "name": "trainingInfo",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "name",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "description",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "durationInMinutes",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "addTraining"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "trainings",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "name",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "description",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "durationInMinutes",
+              "type": "uint256"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "forge-std/=lib/forge-std/src/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "src/trainings/TrainingsManager.sol": "TrainingsManager"
+      },
+      "evmVersion": "cancun",
+      "libraries": {}
+    },
+    "sources": {
+      "src/trainings/ITrainingsManager.sol": {
+        "keccak256": "0x234f285da1d5d1ba3457219ae3b5516628b62ea1a24ca3d4e8b17d9fa4d6d382",
+        "urls": [
+          "bzz-raw://077b2fb141d57cd6e6d17afbda5a9fc2e4eca99ce6d0dc0fe93ca8523428a575",
+          "dweb:/ipfs/QmetyNNUhcF3u5AKPBRC3n9zpg5A34r9ps5avXifkkpojw"
+        ],
+        "license": "UNLICENSED"
+      },
+      "src/trainings/TrainingsManager.sol": {
+        "keccak256": "0x2c670ae2b03a4637b7908d58193c5dc122b2e78117599c21c04bca4d8a589343",
+        "urls": [
+          "bzz-raw://5f40de5b7ca66310b64931dace6f1728082ec1b51fd5a502f52a528430851a98",
+          "dweb:/ipfs/QmQqssmmtGH7SPUg56dp5ZD4jSrFMD3y5uVFsUEhrdgZUP"
+        ],
+        "license": "UNLICENSED"
+      }
+    },
+    "version": 1
+  },
+  "id": 16
+}
