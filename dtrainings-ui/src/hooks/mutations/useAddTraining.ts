@@ -3,12 +3,8 @@ import { useWalletClient } from "wagmi";
 import { Hash } from "viem";
 import addTrainingContract from "hooks/contracts/trainingsManager";
 import { stringToBytes32 } from "utils/converter";
+import {TrainingInfo} from "../interfaces/trainings";
 
-interface TrainingInfo {
-    name: string;
-    description: string;
-    duration: bigint;
-}
 
 interface MutationResponse {
     hash: Hash;
@@ -34,7 +30,9 @@ const useAddTraining = (options?: UseMutationOptions<MutationResponse, unknown, 
             }).then((data: any) => ({
                 hash: data,
                 duration,
-            }));
+            })).catch((error: any) => {
+                console.log("ERROR", error);
+            });
         },
         ...options,
     });
