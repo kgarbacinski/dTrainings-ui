@@ -16,11 +16,11 @@ const useAddTraining = (options?: UseMutationOptions<MutationResponse, unknown, 
     const { data: walletClient } = useWalletClient();
 
     return useMutation({
-        mutationFn: async ({ name, description, duration }: TrainingInfo) => {
+        mutationFn: async ({ name, description, durationInMinutes }: TrainingInfo) => {
             const trainingInfo = {
                 name: stringToBytes32(name),
                 description: stringToBytes32(description),
-                durationInMinutes: BigInt(duration)
+                durationInMinutes: BigInt(durationInMinutes)
             }
 
             return addTrainingContract({
@@ -29,7 +29,7 @@ const useAddTraining = (options?: UseMutationOptions<MutationResponse, unknown, 
                 args: [trainingInfo]
             }).then((data: any) => ({
                 hash: data,
-                duration,
+                durationInMinutes,
             })).catch((error: any) => {
                 console.log("ERROR", error);
             });

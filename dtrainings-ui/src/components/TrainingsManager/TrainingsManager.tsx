@@ -1,40 +1,36 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './TrainingsManager.scss';
 import useAddTraining from "../../hooks/mutations/useAddTraining";
+import {useGetTrainingsForUser} from "../../hooks/queries/useGetTrainings";
+import {useAccount} from "wagmi";
+
 
 const TrainingsManager = () => {
-    const [trainings, setTrainings] = useState([
-        {
-            id: 1,
-            name: 'React Basics',
-            description: 'Beginner course on React',
-            status: 'Approved',
-        },
-        {
-            id: 2,
-            name: 'Solidity 101',
-            description: 'Intro to writing smart contracts',
-            status: 'Unapproved',
-        },
-    ]);
-
+    const { address } = useAccount();
     const onError = (error: any) => {
+
         console.error('Error adding training:', error);
     };
     const onSuccess = (data: any) => {
         console.log('Training added successfully:', data);
     }
+
     const addTrainingMutation = useAddTraining({ onError, onSuccess });
 
+    const { data: trainings = [], isLoading, isError, error } = useGetTrainingsForUser([address]);
+
     const handleDelete = (id: number) => {
-        setTrainings((prev) => prev.filter((t) => t.id !== id));
+        console.log("deleted");
     };
+
+    if (isLoading) return <p>Loading trainings...</p>
+    if (isError) return <p>Error loading trainings: {error.message}</p>
 
     return (
         <div className="trainings-container">
             <div className="trainings-header">
                 <h1>Trainings</h1>
-                <button onClick={() => addTrainingMutation.mutateAsync({ name: "Test", description: "Test", duration: BigInt(10) })} className="create-training-btn">
+                <button onClick={() => addTrainingMutation.mutateAsync({ name: "Test", description: "Test", durationInMinutes: BigInt(10) })} className="create-training-btn">
                     Create Training +
                 </button>
             </div>
@@ -46,13 +42,13 @@ const TrainingsManager = () => {
                 </div>
             ) : (
                 <div className="trainings-list">
-                    {trainings.map((training) => (
-                        <div key={training.id} className="training-card">
+                    {trainings.map((training, index) => (
+                        <div key={index} className="training-card">
                             <h3>{training.name}</h3>
                             <p>{training.description}</p>
-                            <span className="status-badge">{training.status}</span>
+                            <span className="status-badge">Done</span>
                             <button
-                                onClick={() => handleDelete(training.id)}
+                                onClick={() => handleDelete(index)}
                                 className="delete-btn"
                             >
                                 Delete
