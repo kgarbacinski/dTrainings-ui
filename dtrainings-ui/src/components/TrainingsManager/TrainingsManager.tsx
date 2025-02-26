@@ -1,67 +1,93 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TrainingsManager.scss';
 import useAddTraining from "../../hooks/mutations/useAddTraining";
+import { useGetTrainingsForUser } from "../../hooks/queries/useGetTrainings";
+import { useAccount } from "wagmi";
+import Navbar from "../Navbar/Navbar";
+import CreateTrainingDetailsModal from "./CreateTrainingDetailsModal";
+import { TrainingInfo } from "interfaces/trainings";
+import { toast, ToastContainer } from "react-toastify";
 
 const TrainingsManager = () => {
-    const [trainings, setTrainings] = useState([
-        {
-            id: 1,
-            name: 'React Basics',
-            description: 'Beginner course on React',
-            status: 'Approved',
-        },
-        {
-            id: 2,
-            name: 'Solidity 101',
-            description: 'Intro to writing smart contracts',
-            status: 'Unapproved',
-        },
-    ]);
+    const [selectedTraining, setSelectedTraining] = useState<TrainingInfo | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedTraining(null);
+    }
+
+    const openCreateModal = () => {
+        setSelectedTraining({ name: "", description: "", durationInMinutes: BigInt(0) });
+        setIsModalOpen(true);
+    };
+
+    const confirmTraining = async (newTraining: TrainingInfo) => {
+        if (newTraining) {
+            await addTrainingMutation.mutateAsync(newTraining);
+        }
+        closeModal();
+    };
+
+    const { address } = useAccount();
 
     const onError = (error: any) => {
-        console.error('Error adding training:', error);
+        toast("Error adding training", { type: "error" });
     };
     const onSuccess = (data: any) => {
-        console.log('Training added successfully:', data);
+        toast("Training added successfully. " +
+            "It may take a while to process the transaction on the blockchain.", { type: "success" });
     }
+
     const addTrainingMutation = useAddTraining({ onError, onSuccess });
 
+    const { data: trainings = [], isLoading, isError, error } = useGetTrainingsForUser([address]);
+
     const handleDelete = (id: number) => {
-        setTrainings((prev) => prev.filter((t) => t.id !== id));
+        console.log("deleted");
     };
 
+    if (isLoading) return <p>Loading trainings...</p>
+    if (isError) return <p>Error loading trainings: {error.message}</p>
+
     return (
-        <div className="trainings-container">
-            <div className="trainings-header">
-                <h1>Trainings</h1>
-                <button onClick={() => addTrainingMutation.mutateAsync({ name: "Test", description: "Test", duration: BigInt(10) })} className="create-training-btn">
-                    Create Training +
-                </button>
+        <>
+            <Navbar />
+            <ToastContainer />
+
+            <div className="trainings-container">
+                <div className="trainings-header">
+                    <p>Your trainings</p>
+                    <button onClick={openCreateModal} className="create-training-btn">
+                        Create Training +
+                    </button>
+                </div>
+
+                {trainings.length === 0 ? (
+                    <div className="no-trainings">
+                        <h2>No trainings found</h2>
+                        <p>Click "Create Training" to add a new training session.</p>
+                    </div>
+                ) : (
+                    <div className="trainings-list">
+                        {trainings.map((training, index) => (
+                            <div key={index} className="training-card">
+                                <h3>{training.name}</h3>
+                                <p>{training.description}</p>
+                                <span className="status-badge">Done</span>
+                                <button
+                                    onClick={() => handleDelete(index)}
+                                    className="delete-btn">
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
-            {trainings.length === 0 ? (
-                <div className="no-trainings">
-                    <h2>No trainings found</h2>
-                    <p>Click "Create Training" to add a new training session.</p>
-                </div>
-            ) : (
-                <div className="trainings-list">
-                    {trainings.map((training) => (
-                        <div key={training.id} className="training-card">
-                            <h3>{training.name}</h3>
-                            <p>{training.description}</p>
-                            <span className="status-badge">{training.status}</span>
-                            <button
-                                onClick={() => handleDelete(training.id)}
-                                className="delete-btn"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
+            <CreateTrainingDetailsModal training={selectedTraining} isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmTraining} />
+        </>
     );
 };
 

@@ -1,9 +1,9 @@
 import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi'
 
 const Account = () => {
-    const { address } = useAccount()
-    const { data: ensName } = useEnsName({ address })
-    const { data: ensAvatar } = useEnsAvatar({ name: ensName! })
+    const { address } = useAccount();
+    const { data: ensName } = useEnsName({ address });
+    const { data: ensAvatar } = useEnsAvatar({ name: ensName! });
 
     return (
         <div>

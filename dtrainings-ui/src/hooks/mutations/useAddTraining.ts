@@ -3,12 +3,8 @@ import { useWalletClient } from "wagmi";
 import { Hash } from "viem";
 import addTrainingContract from "hooks/contracts/trainingsManager";
 import { stringToBytes32 } from "utils/converter";
+import { TrainingInfo } from "interfaces/trainings";
 
-interface TrainingInfo {
-    name: string;
-    description: string;
-    duration: bigint;
-}
 
 interface MutationResponse {
     hash: Hash;
@@ -20,11 +16,11 @@ const useAddTraining = (options?: UseMutationOptions<MutationResponse, unknown, 
     const { data: walletClient } = useWalletClient();
 
     return useMutation({
-        mutationFn: async ({ name, description, duration }: TrainingInfo) => {
+        mutationFn: async ({ name, description, durationInMinutes }: TrainingInfo) => {
             const trainingInfo = {
                 name: stringToBytes32(name),
                 description: stringToBytes32(description),
-                durationInMinutes: BigInt(duration)
+                durationInMinutes: BigInt(durationInMinutes)
             }
 
             return addTrainingContract({
@@ -33,8 +29,10 @@ const useAddTraining = (options?: UseMutationOptions<MutationResponse, unknown, 
                 args: [trainingInfo]
             }).then((data: any) => ({
                 hash: data,
-                duration,
-            }));
+                durationInMinutes,
+            })).catch((error: any) => {
+                console.log("ERROR", error);
+            });
         },
         ...options,
     });
