@@ -1,7 +1,7 @@
 import env from 'react-dotenv';
 
-import {localNetworkConfig, sepoliaNetworkConfig, mainnetNetworkConfig} from './configs';
-import {NetworkConfig} from './types';
+import { localNetworkConfig, sepoliaNetworkConfig, mainnetNetworkConfig } from './configs';
+import { NetworkConfig } from './types';
 
 export const getNetworkConfig = (envConfig: string): NetworkConfig => {
     switch (envConfig) {

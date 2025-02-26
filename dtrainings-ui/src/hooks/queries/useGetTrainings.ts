@@ -1,12 +1,12 @@
-import {useQuery} from '@tanstack/react-query';
-import {usePublicClient} from "wagmi";
+import { useQuery } from '@tanstack/react-query';
+import { usePublicClient } from "wagmi";
 import networkConfig from "../../constants";
-import {TrainingInfo} from "hooks/interfaces/trainings";
-import {readTrainingsForUser} from "hooks/contracts/trainingsManager";
-import {bytes32ToString} from "../../utils/converter";
+import { TrainingInfo } from "interfaces/trainings";
+import { readTrainingsForUser } from "hooks/contracts/trainingsManager";
+import { bytes32ToString } from "../../utils/converter";
 
-export const useGetTrainingsForUser = ( args: unknown[] ) => {
-    const publicClient = usePublicClient({chainId: networkConfig.id});
+export const useGetTrainingsForUser = (args: unknown[]) => {
+    const publicClient = usePublicClient({ chainId: networkConfig.id });
 
     return useQuery<TrainingInfo[], any>({
         queryFn: () =>

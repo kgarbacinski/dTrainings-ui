@@ -1,4 +1,4 @@
-import {NetworkConfig} from "./types";
+import { NetworkConfig } from "./types";
 
 export const localNetworkConfig: NetworkConfig = {
     id: 1337,

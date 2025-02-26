@@ -3,7 +3,7 @@ import { useWalletClient } from "wagmi";
 import { Hash } from "viem";
 import addTrainingContract from "hooks/contracts/trainingsManager";
 import { stringToBytes32 } from "utils/converter";
-import {TrainingInfo} from "../interfaces/trainings";
+import { TrainingInfo } from "interfaces/trainings";
 
 
 interface MutationResponse {

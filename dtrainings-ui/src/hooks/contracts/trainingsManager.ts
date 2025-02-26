@@ -1,6 +1,6 @@
 import TrainingsManager from "hooks/contracts/abi/TrainingsManager.json";
 import env from 'react-dotenv';
-import {toChecksumAddress} from '@ethereumjs/util';
+import { toChecksumAddress } from '@ethereumjs/util';
 
 
 type WriteContract = {
@@ -15,31 +15,31 @@ type ReadContract = {
     args: unknown[]
 }
 
-export const addTrainingContract = ({walletClient, functionName, args}: WriteContract) => {
+export const addTrainingContract = ({ walletClient, functionName, args }: WriteContract) => {
     return walletClient.writeContract({
-            abi: TrainingsManager.abi,
-            address: toChecksumAddress(env.TRAININGS_MANAGER_CONTRACT_ADDRESS),
-            args: args,
-            functionName: functionName,
-        }
+        abi: TrainingsManager.abi,
+        address: toChecksumAddress(env.TRAININGS_MANAGER_CONTRACT_ADDRESS),
+        args: args,
+        functionName: functionName,
+    }
     )
 }
 
-export const readTrainingsForUser = ({publicClient, functionName, args}: ReadContract) => {
+export const readTrainingsForUser = ({ publicClient, functionName, args }: ReadContract) => {
     console.log(publicClient.readContract({
-            abi: TrainingsManager.abi,
-            address: toChecksumAddress(env.TRAININGS_MANAGER_CONTRACT_ADDRESS),
-            args: args,
-            functionName: functionName,
-        }
+        abi: TrainingsManager.abi,
+        address: toChecksumAddress(env.TRAININGS_MANAGER_CONTRACT_ADDRESS),
+        args: args,
+        functionName: functionName,
+    }
     ));
 
     return publicClient.readContract({
-            abi: TrainingsManager.abi,
-            address: toChecksumAddress(env.TRAININGS_MANAGER_CONTRACT_ADDRESS),
-            args: args,
-            functionName: functionName,
-        }
+        abi: TrainingsManager.abi,
+        address: toChecksumAddress(env.TRAININGS_MANAGER_CONTRACT_ADDRESS),
+        args: args,
+        functionName: functionName,
+    }
     );
 }
 
