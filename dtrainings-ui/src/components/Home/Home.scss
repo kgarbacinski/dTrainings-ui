@@ -1,72 +1,145 @@
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: normal;
-  justify-content: flex-start;
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.home {
   min-height: 100vh;
-  padding: 2rem;
-  background-color: #1a1a1a;
+  background: $bg-base;
+}
 
-  .content {
-    padding-left: 10rem;
+// --- Hero Section ---
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  position: relative;
+  overflow: hidden;
+  padding: $space-xl;
+
+  &__glow {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(79, 143, 255, 0.12) 0%, transparent 70%);
+    pointer-events: none;
   }
 
-  p {
-    color: #fff;
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-  }
-
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 1200px;
-    margin-top: 2rem;
-  }
-
-  .card {
-    background-color: #2a2a2a;
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+  &__content {
     text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  &__title {
+    font-size: $font-size-hero;
+    font-weight: 700;
+    line-height: 1.1;
+    color: $text-primary;
+    margin-bottom: $space-lg;
+    letter-spacing: -0.03em;
+  }
+
+  &__accent {
+    background: linear-gradient(135deg, $accent, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__subtitle {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    max-width: 500px;
+    margin: 0 auto $space-2xl;
+    line-height: 1.6;
+  }
+
+  &__cta {
+    @include button-primary;
+    padding: $space-md $space-2xl;
+    font-size: $font-size-lg;
+    font-weight: 600;
+  }
+}
+
+// --- Features Section ---
+.features {
+  @include page-container;
+  padding-bottom: $space-3xl;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-lg;
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.feature-card {
+  @include card;
+  text-align: center;
+  padding: $space-2xl $space-lg;
+  position: relative;
+
+  &--active {
+    cursor: pointer;
 
     &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      border-color: $accent;
     }
+  }
 
-    p {
-      color: #ccc;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      margin-bottom: 1rem;
+  &--disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: $border-color;
     }
+  }
 
-    p.description {
-        color: #fff;
-        font-size: 0.7rem;
-        line-height: 1.4;
-        margin-bottom: 1rem;
-    }
+  &__badge {
+    position: absolute;
+    top: $space-md;
+    right: $space-md;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $warning;
+    background: rgba(245, 158, 11, 0.1);
+    padding: $space-xs $space-sm;
+    border-radius: $radius-pill;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
 
-    button {
-      background: linear-gradient(45deg, #1e90ff, #00bfff);
-      border: none;
-      border-radius: 30px;
-      color: #fff;
-      font-size: 0.9rem;
-      padding: 0.5rem 1.2rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+  &__icon {
+    font-size: 2.5rem;
+    margin-bottom: $space-md;
+  }
 
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(30, 144, 255, 0.4);
-      }
-    }
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $space-sm;
+  }
+
+  &__description {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    line-height: 1.5;
   }
 }

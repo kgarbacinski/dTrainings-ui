@@ -1,102 +1,169 @@
-.trainings-container {
-  padding: 1rem 50rem;
-  background-color: #1a1a1a; // Dark background
-  color: #fff;
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.trainings-page {
   min-height: 100vh;
+  background: $bg-base;
+}
+
+.trainings-loading,
+.trainings-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: $text-secondary;
+  gap: $space-md;
+}
+
+.trainings-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $border-color;
+  border-top-color: $accent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.trainings-error {
+  color: $danger;
+
+  &__message {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+  }
+}
+
+.trainings-container {
+  @include page-container;
+  color: $text-primary;
 
   .trainings-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: $space-2xl;
 
-    p {
-      color: #fff;
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
+    h1 {
+      font-size: $font-size-xl;
+      font-weight: 600;
     }
 
     .create-training-btn {
-      background: linear-gradient(45deg, #1e90ff, #00bfff);
-      border: none;
-      border-radius: 30px;
-      color: #fff;
-      font-size: 1rem;
-      padding: 0.5rem 1.5rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(30, 144, 255, 0.4);
-      }
+      @include button-primary;
     }
   }
 
   .no-trainings {
     text-align: center;
+    padding: $space-3xl $space-xl;
+    color: $text-secondary;
+
+    &__icon {
+      font-size: 3rem;
+      margin-bottom: $space-md;
+      opacity: 0.5;
+    }
 
     h2 {
-      margin-bottom: 1rem;
+      font-size: $font-size-xl;
+      color: $text-primary;
+      margin-bottom: $space-sm;
+      font-weight: 600;
     }
 
     p {
-      color: #ccc;
+      color: $text-muted;
+      margin-bottom: $space-xl;
+    }
+
+    .create-training-btn {
+      @include button-primary;
     }
   }
 
   .trainings-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $space-lg;
+
+    @include respond-to(sm) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .training-card {
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    padding: 1.5rem;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: default; // or pointer if you want the whole card clickable
+    @include card;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
 
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: $space-sm;
     }
 
-    h3 {
-      margin: 0 0 0.5rem;
-      color: #fff;
+    &__title {
+      font-size: $font-size-lg;
+      font-weight: 600;
+      color: $text-primary;
     }
 
-    p {
-      color: #ccc;
-      margin-bottom: 1rem;
+    &__duration {
+      font-size: $font-size-xs;
+      color: $accent;
+      background: rgba(79, 143, 255, 0.1);
+      padding: $space-xs $space-sm;
+      border-radius: $radius-pill;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    &__description {
+      color: $text-secondary;
+      font-size: $font-size-sm;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: $space-md;
+    }
+
+    &__footer {
+      border-top: 1px solid $border-color;
+      padding-top: $space-md;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .status-badge {
-      display: inline-block;
-      background-color: #333;
-      color: #fff;
-      padding: 0.3rem 0.6rem;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: $space-xs;
+      font-size: $font-size-xs;
+      font-weight: 500;
+      color: $success;
+      background: rgba(52, 211, 153, 0.1);
+      padding: $space-xs $space-sm;
+      border-radius: $radius-pill;
+
+      &::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: $success;
+        border-radius: 50%;
+      }
     }
 
     .delete-btn {
-      background-color: #ff4d4d;
-      border: none;
-      border-radius: 20px;
-      color: #fff;
-      padding: 0.4rem 1rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.4);
-      }
+      @include button-danger;
     }
   }
 }
