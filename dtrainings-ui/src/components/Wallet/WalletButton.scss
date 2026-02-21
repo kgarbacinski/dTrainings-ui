@@ -1,72 +1,98 @@
-/* Wallet button styling */
-.wallet-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(45deg, #1e90ff, #00bfff);
-  border: none;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 1rem;
-  padding: 0.5rem 1.2rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(30, 144, 255, 0.4);
+.wallet-button {
+  @include button-primary;
+  font-size: $font-size-sm;
+  padding: $space-sm $space-md;
+}
+
+.wallet-modal {
+  &__overlay {
+    @include modal-overlay;
+  }
+
+  &__content {
+    background: $bg-modal;
+    color: $text-primary;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    padding: $space-2xl;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+    box-shadow: $shadow-lg;
+    animation: walletSlideIn $transition-base;
+  }
+
+  &__close {
+    position: absolute;
+    top: $space-md;
+    right: $space-md;
+    background: transparent;
+    border: none;
+    color: $text-muted;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: $space-xs;
+    line-height: 1;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    margin-bottom: $space-xl;
+  }
+
+  &__info {
+    margin-bottom: $space-xl;
+
+    p {
+      display: flex;
+      flex-direction: column;
+      gap: $space-xs;
+      padding: $space-md;
+      background: $bg-input;
+      border-radius: $radius-sm;
+      margin-bottom: $space-sm;
+      border: 1px solid $border-color;
+    }
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  &__value {
+    font-size: $font-size-sm;
+    color: $text-primary;
+    word-break: break-all;
+  }
+
+  &__disconnect {
+    @include button-danger;
+    width: 100%;
+    justify-content: center;
+    padding: $space-sm $space-lg;
   }
 }
 
-/* Modal overlay covers the entire viewport */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-/* Modal content container */
-.modal-content {
-  background: #fff;
-  border-radius: 8px;
-  padding: 2rem;
-  max-width: 400px;
-  width: 90%;
-  position: relative;
-  text-align: center;
-}
-
-/* Close button styling */
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* Disconnect button styling */
-.disconnect-button {
-  background: #ff4d4d;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 30px;
-  margin-top: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(255, 77, 77, 0.4);
+@keyframes walletSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

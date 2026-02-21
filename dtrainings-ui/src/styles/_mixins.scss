@@ -1,0 +1,138 @@
+@use 'variables' as *;
+
+// ===========================================
+// Reusable Mixins
+// ===========================================
+
+// --- Responsive breakpoints ---
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: $bp-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: $bp-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: $bp-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: $bp-xl) { @content; }
+  }
+}
+
+// --- Glassmorphism effect ---
+@mixin glassmorphism($bg: rgba(12, 12, 20, 0.8)) {
+  background: $bg;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid $border-color;
+}
+
+// --- Page container (centered, max-width) ---
+@mixin page-container($max-width: 1200px) {
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $space-xl $space-lg;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// --- Card ---
+@mixin card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-md;
+    border-color: $border-color-hover;
+  }
+}
+
+// --- Button primary ---
+@mixin button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  background: $accent;
+  color: #fff;
+  border: none;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-lg;
+  font-size: $font-size-base;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    background: $accent-hover;
+    transform: translateY(-1px);
+    box-shadow: $shadow-glow;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// --- Button danger ---
+@mixin button-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: $danger;
+  border: 1px solid $danger;
+  border-radius: $radius-pill;
+  padding: $space-xs $space-md;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: background $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $danger;
+    color: #fff;
+  }
+}
+
+// --- Modal overlay ---
+@mixin modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $z-modal;
+}
+
+// --- Form input ---
+@mixin form-input {
+  width: 100%;
+  padding: $space-sm $space-md;
+  background: $bg-input;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  font-size: $font-size-base;
+  font-family: $font-family;
+  transition: border-color $transition-fast;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $accent;
+  }
+}

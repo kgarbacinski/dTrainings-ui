@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { WagmiProvider } from "wagmi";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { QueryClientProvider } from "@tanstack/react-query";

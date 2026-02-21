@@ -20,7 +20,6 @@ const WalletButton = () => {
                 authenticationStatus,
                 mounted,
             }) => {
-                // If not mounted or not connected, show the connect wallet button.
                 if (!mounted || authenticationStatus === 'loading' || !account || !chain) {
                     return (
                         <button className="wallet-button" onClick={openConnectModal}>
@@ -29,7 +28,6 @@ const WalletButton = () => {
                     );
                 }
 
-                // Format the address (e.g., "0x12...34")
                 const displayAddress =
                     account.address.slice(0, 6) + '...' + account.address.slice(-4);
 
@@ -40,20 +38,24 @@ const WalletButton = () => {
                         </button>
 
                         {modalOpen && (
-                            <div className="modal-overlay" onClick={handleModalClose}>
-                                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                                    <button className="modal-close" onClick={handleModalClose}>
+                            <div className="wallet-modal__overlay" onClick={handleModalClose}>
+                                <div className="wallet-modal__content" onClick={(e) => e.stopPropagation()}>
+                                    <button className="wallet-modal__close" onClick={handleModalClose}>
                                         &times;
                                     </button>
-                                    <h2>Wallet Details</h2>
-                                    <p>
-                                        <strong>Address:</strong> {account.address}
-                                    </p>
-                                    <p>
-                                        <strong>Chain:</strong> {chain.name}
-                                    </p>
+                                    <h2 className="wallet-modal__title">Wallet Details</h2>
+                                    <div className="wallet-modal__info">
+                                        <p>
+                                            <span className="wallet-modal__label">Address</span>
+                                            <span className="wallet-modal__value">{account.address}</span>
+                                        </p>
+                                        <p>
+                                            <span className="wallet-modal__label">Chain</span>
+                                            <span className="wallet-modal__value">{chain.name}</span>
+                                        </p>
+                                    </div>
                                     <button
-                                        className="disconnect-button"
+                                        className="wallet-modal__disconnect"
                                         onClick={() => {
                                             disconnect();
                                             handleModalClose();
