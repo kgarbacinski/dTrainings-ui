@@ -23,6 +23,11 @@
               "name": "durationInMinutes",
               "type": "uint256",
               "internalType": "uint256"
+            },
+            {
+              "name": "createdAt",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }
@@ -42,6 +47,25 @@
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "getTrainingCount",
+      "inputs": [
+        {
+          "name": "creator",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
     },
     {
       "type": "function",
@@ -73,6 +97,11 @@
               "name": "durationInMinutes",
               "type": "uint256",
               "internalType": "uint256"
+            },
+            {
+              "name": "createdAt",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }
@@ -85,6 +114,42 @@
       "inputs": [],
       "outputs": [],
       "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "updateTraining",
+      "inputs": [
+        {
+          "name": "name",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "newDescription",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "newDurationInMinutes",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "event",
+      "name": "Initialized",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
     },
     {
       "type": "event",
@@ -108,6 +173,25 @@
     {
       "type": "event",
       "name": "TrainingDeleted",
+      "inputs": [
+        {
+          "name": "name",
+          "type": "bytes32",
+          "indexed": false,
+          "internalType": "bytes32"
+        },
+        {
+          "name": "creator",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "TrainingUpdated",
       "inputs": [
         {
           "name": "name",

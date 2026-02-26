@@ -21,6 +21,10 @@ const Stats = () => {
         return longest;
     }, null);
 
+    const recentTrainings = [...trainings]
+        .sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
+        .slice(0, 5);
+
     if (isLoading) return (
         <div className="stats-page">
             <Navbar />
@@ -80,12 +84,19 @@ const Stats = () => {
                             <div className="stats-recent">
                                 <h2 className="stats-recent__title">Recent Trainings</h2>
                                 <div className="stats-recent__list">
-                                    {trainings.slice(-5).reverse().map((training, index) => (
+                                    {recentTrainings.map((training, index) => (
                                         <div key={index} className="stats-recent__item">
                                             <span className="stats-recent__name">{training.name}</span>
-                                            <span className="stats-recent__duration">
-                                                {training.durationInMinutes.toString()} min
-                                            </span>
+                                            <div className="stats-recent__meta">
+                                                {training.createdAt > BigInt(0) && (
+                                                    <span className="stats-recent__date">
+                                                        {new Date(Number(training.createdAt) * 1000).toLocaleDateString()}
+                                                    </span>
+                                                )}
+                                                <span className="stats-recent__duration">
+                                                    {training.durationInMinutes.toString()} min
+                                                </span>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

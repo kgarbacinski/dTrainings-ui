@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './TrainingsManager.scss';
 import useAddTraining from "../../hooks/mutations/useAddTraining";
 import useDeleteTraining from "../../hooks/mutations/useDeleteTraining";
+import useUpdateTraining from "../../hooks/mutations/useUpdateTraining";
 import { useGetTrainingsForUser } from "../../hooks/queries/useGetTrainings";
 import { useAccount } from "wagmi";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,6 +16,7 @@ import { toast, ToastContainer } from "react-toastify";
 const TrainingsManager = () => {
     const [selectedTraining, setSelectedTraining] = useState<TrainingInfo | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMode, setModalMode] = useState<"create" | "edit">("create");
     const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -26,28 +28,53 @@ const TrainingsManager = () => {
     }
 
     const openCreateModal = () => {
-        setSelectedTraining({ name: "", description: "", durationInMinutes: BigInt(0) });
+        setSelectedTraining({ name: "", description: "", durationInMinutes: BigInt(0), createdAt: BigInt(0) });
+        setModalMode("create");
+        setIsModalOpen(true);
+    };
+
+    const openEditModal = (training: TrainingInfo) => {
+        setSelectedTraining(training);
+        setModalMode("edit");
         setIsModalOpen(true);
     };
 
     const confirmTraining = async (newTraining: TrainingInfo) => {
-        if (newTraining) {
+        if (modalMode === "create") {
             await addTrainingMutation.mutateAsync(newTraining);
+        } else {
+            await updateTrainingMutation.mutateAsync({
+                name: newTraining.name,
+                newDescription: newTraining.description,
+                newDurationInMinutes: newTraining.durationInMinutes,
+            });
         }
         closeModal();
     };
 
     const { address } = useAccount();
 
-    const onError = (error: any) => {
-        toast("Error adding training", { type: "error" });
-    };
-    const onSuccess = (data: any) => {
-        toast("Training added successfully. " +
-            "It may take a while to process the transaction on the blockchain.", { type: "success" });
-    }
+    const addTrainingMutation = useAddTraining({
+        onError: () => {
+            toast("Error adding training", { type: "error" });
+        },
+        onSuccess: () => {
+            toast("Training added successfully. " +
+                "It may take a while to process the transaction on the blockchain.", { type: "success" });
+            queryClient.invalidateQueries({ queryKey: ['getTrainings'] });
+        },
+    });
 
-    const addTrainingMutation = useAddTraining({ onError, onSuccess });
+    const updateTrainingMutation = useUpdateTraining({
+        onError: () => {
+            toast("Error updating training", { type: "error" });
+        },
+        onSuccess: () => {
+            toast("Training updated successfully. " +
+                "It may take a while to process the transaction on the blockchain.", { type: "success" });
+            queryClient.invalidateQueries({ queryKey: ['getTrainings'] });
+        },
+    });
 
     const deleteTrainingMutation = useDeleteTraining({
         onError: () => {
@@ -139,13 +166,25 @@ const TrainingsManager = () => {
                                         </span>
                                     </div>
                                     <p className="training-card__description">{training.description}</p>
+                                    {training.createdAt > BigInt(0) && (
+                                        <span className="training-card__date">
+                                            {new Date(Number(training.createdAt) * 1000).toLocaleDateString()}
+                                        </span>
+                                    )}
                                     <div className="training-card__footer">
                                         <span className="status-badge">Done</span>
-                                        <button
-                                            onClick={() => handleDelete(training.name)}
-                                            className="delete-btn">
-                                            Delete
-                                        </button>
+                                        <div className="training-card__actions">
+                                            <button
+                                                onClick={() => openEditModal(training)}
+                                                className="edit-btn">
+                                                Edit
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(training.name)}
+                                                className="delete-btn">
+                                                Delete
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -162,7 +201,7 @@ const TrainingsManager = () => {
                 onCancel={() => setDeleteTarget(null)}
             />
 
-            <CreateTrainingDetailsModal training={selectedTraining} isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmTraining} />
+            <CreateTrainingDetailsModal training={selectedTraining} isOpen={isModalOpen} mode={modalMode} onClose={closeModal} onConfirm={confirmTraining} />
         </div>
     );
 };

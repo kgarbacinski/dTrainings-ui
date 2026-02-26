@@ -135,6 +135,17 @@
     padding: $space-md $space-lg;
   }
 
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+  }
+
+  &__date {
+    font-size: $font-size-xs;
+    color: $text-muted;
+  }
+
   &__name {
     font-weight: 500;
     color: $text-primary;

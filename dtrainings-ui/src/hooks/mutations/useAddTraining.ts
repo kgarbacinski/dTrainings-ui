@@ -3,7 +3,7 @@ import { useWalletClient } from "wagmi";
 import { Hash } from "viem";
 import addTrainingContract from "hooks/contracts/trainingsManager";
 import { stringToBytes32 } from "utils/converter";
-import { TrainingInfo } from "interfaces/trainings";
+import { TrainingCreateInput } from "interfaces/trainings";
 
 
 interface MutationResponse {
@@ -12,15 +12,16 @@ interface MutationResponse {
 }
 
 
-const useAddTraining = (options?: UseMutationOptions<MutationResponse, unknown, TrainingInfo>): UseMutationResult<MutationResponse, unknown, TrainingInfo> => {
+const useAddTraining = (options?: UseMutationOptions<MutationResponse, unknown, TrainingCreateInput>): UseMutationResult<MutationResponse, unknown, TrainingCreateInput> => {
     const { data: walletClient } = useWalletClient();
 
     return useMutation({
-        mutationFn: async ({ name, description, durationInMinutes }: TrainingInfo) => {
+        mutationFn: async ({ name, description, durationInMinutes }: TrainingCreateInput) => {
             const trainingInfo = {
                 name: stringToBytes32(name),
                 description: stringToBytes32(description),
-                durationInMinutes: BigInt(durationInMinutes)
+                durationInMinutes: BigInt(durationInMinutes),
+                createdAt: BigInt(0)
             }
 
             return addTrainingContract({

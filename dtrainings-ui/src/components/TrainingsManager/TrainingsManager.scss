@@ -158,6 +158,13 @@
       font-size: $font-size-sm;
       line-height: 1.5;
       flex: 1;
+      margin-bottom: $space-sm;
+    }
+
+    &__date {
+      display: block;
+      font-size: $font-size-xs;
+      color: $text-muted;
       margin-bottom: $space-md;
     }
 
@@ -167,6 +174,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    &__actions {
+      display: flex;
+      gap: $space-sm;
     }
 
     .status-badge {
@@ -186,6 +198,26 @@
         height: 6px;
         background: $success;
         border-radius: 50%;
+      }
+    }
+
+    .edit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: $accent;
+      border: 1px solid $accent;
+      border-radius: $radius-pill;
+      padding: $space-xs $space-md;
+      font-size: $font-size-xs;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background $transition-fast, color $transition-fast;
+
+      &:hover {
+        background: $accent;
+        color: $bg-base;
       }
     }
 

@@ -18,9 +18,10 @@ export const useGetTrainingsForUser = (args: unknown[]) => {
         queryKey: ['getTrainings'],
         select: (response) =>
             response.map(training => ({
-                ...training,
                 name: bytes32ToString(training.name),
                 description: bytes32ToString(training.description),
+                durationInMinutes: training.durationInMinutes,
+                createdAt: training.createdAt,
             })),
     });
 }
