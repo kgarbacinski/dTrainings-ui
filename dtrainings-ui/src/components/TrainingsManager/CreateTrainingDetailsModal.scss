@@ -60,6 +60,11 @@
     @include form-input;
   }
 
+  &__input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &__textarea {
     height: 90px;
     resize: vertical;

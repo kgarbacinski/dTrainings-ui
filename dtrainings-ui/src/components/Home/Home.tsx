@@ -48,8 +48,10 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <div className="feature-card feature-card--disabled">
-                        <span className="feature-card__badge">Soon</span>
+                    <div
+                        className="feature-card feature-card--active"
+                        onClick={() => navigate('/stats')}
+                    >
                         <div className="feature-card__icon">&#x1F4CA;</div>
                         <h3 className="feature-card__title">Your Stats</h3>
                         <p className="feature-card__description">

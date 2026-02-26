@@ -7,6 +7,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import GlobalStyle from "./GlobalStyle";
 import TrainingsManager from "./components/TrainingsManager/TrainingsManager";
+import Stats from "./components/Stats/Stats";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/trainings-manager" element={<TrainingsManager />} />
+                        <Route path="/stats" element={<Stats />} />
                     </Routes>
                 </RainbowKitProvider>
             </QueryClientProvider>

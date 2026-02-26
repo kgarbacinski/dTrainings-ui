@@ -5,20 +5,22 @@ import "./CreateTrainingDetailsModal.scss";
 interface TrainingDetailsModalProps {
     training: TrainingInfo | null;
     isOpen: boolean;
+    mode: "create" | "edit";
     onClose: () => void;
     onConfirm: (updatedTraining: TrainingInfo) => void;
 }
 
-const CreateTrainingDetailsModal: React.FC<TrainingDetailsModalProps> = ({ training, isOpen, onClose, onConfirm }) => {
+const CreateTrainingDetailsModal: React.FC<TrainingDetailsModalProps> = ({ training, isOpen, mode, onClose, onConfirm }) => {
     const [formData, setFormData] = useState<TrainingInfo>({
         name: "",
         description: "",
-        durationInMinutes: BigInt(0)
+        durationInMinutes: BigInt(0),
+        createdAt: BigInt(0)
     });
 
     useEffect(() => {
         if (isOpen) {
-            setFormData(training || { name: "", description: "", durationInMinutes: BigInt(0) });
+            setFormData(training || { name: "", description: "", durationInMinutes: BigInt(0), createdAt: BigInt(0) });
         }
     }, [isOpen, training]);
 
@@ -49,11 +51,13 @@ const CreateTrainingDetailsModal: React.FC<TrainingDetailsModalProps> = ({ train
         }
     };
 
+    const isEdit = mode === "edit";
+
     return (
         <div className="training-modal__overlay" onClick={handleOverlayClick}>
             <div className="training-modal__content">
                 <button className="training-modal__close" onClick={onClose}>&times;</button>
-                <h2 className="training-modal__title">Create Training</h2>
+                <h2 className="training-modal__title">{isEdit ? "Edit Training" : "Create Training"}</h2>
 
                 <div className="training-modal__field">
                     <label htmlFor="training-name" className="training-modal__label">Title</label>
@@ -65,6 +69,7 @@ const CreateTrainingDetailsModal: React.FC<TrainingDetailsModalProps> = ({ train
                         onChange={handleChange}
                         placeholder="Enter training title"
                         className="training-modal__input"
+                        disabled={isEdit}
                     />
                 </div>
 
@@ -95,7 +100,7 @@ const CreateTrainingDetailsModal: React.FC<TrainingDetailsModalProps> = ({ train
 
                 <div className="training-modal__actions">
                     <button onClick={handleConfirm} disabled={!isValid} className="training-modal__confirm">
-                        Confirm
+                        {isEdit ? "Save Changes" : "Create"}
                     </button>
                     <button onClick={onClose} className="training-modal__cancel">Cancel</button>
                 </div>

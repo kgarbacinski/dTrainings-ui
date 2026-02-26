@@ -1,0 +1,49 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.network-guard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: $space-xl;
+
+  &__card {
+    @include card;
+    text-align: center;
+    padding: $space-2xl $space-xl;
+    max-width: 420px;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  &__icon {
+    font-size: 3rem;
+    margin-bottom: $space-md;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $warning;
+    margin-bottom: $space-sm;
+  }
+
+  &__message {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    line-height: 1.5;
+    margin-bottom: $space-xl;
+
+    strong {
+      color: $text-primary;
+    }
+  }
+
+  &__button {
+    @include button-primary;
+    width: 100%;
+  }
+}
