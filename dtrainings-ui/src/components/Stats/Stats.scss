@@ -1,0 +1,151 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.stats-page {
+  min-height: 100vh;
+  background: $bg-base;
+}
+
+.stats-loading,
+.stats-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: $text-secondary;
+  gap: $space-md;
+}
+
+.stats-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $border-color;
+  border-top-color: $accent;
+  border-radius: 50%;
+  animation: statsSpin 0.8s linear infinite;
+}
+
+@keyframes statsSpin {
+  to { transform: rotate(360deg); }
+}
+
+.stats-error {
+  color: $danger;
+
+  &__message {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+  }
+}
+
+.stats-container {
+  @include page-container;
+  color: $text-primary;
+}
+
+.stats-title {
+  font-size: $font-size-xl;
+  font-weight: 600;
+  margin-bottom: $space-2xl;
+}
+
+.stats-empty {
+  text-align: center;
+  padding: $space-3xl $space-xl;
+  color: $text-secondary;
+
+  &__icon {
+    font-size: 3rem;
+    margin-bottom: $space-md;
+    opacity: 0.5;
+  }
+
+  h2 {
+    font-size: $font-size-xl;
+    color: $text-primary;
+    margin-bottom: $space-sm;
+    font-weight: 600;
+  }
+
+  p {
+    color: $text-muted;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-lg;
+  margin-bottom: $space-2xl;
+
+  @include respond-to(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  &__value {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $accent;
+  }
+
+  &__sub {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+  }
+}
+
+.stats-recent {
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    margin-bottom: $space-lg;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  &__item {
+    @include card;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $space-md $space-lg;
+  }
+
+  &__name {
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  &__duration {
+    font-size: $font-size-sm;
+    color: $accent;
+    background: rgba(79, 143, 255, 0.1);
+    padding: $space-xs $space-sm;
+    border-radius: $radius-pill;
+    font-weight: 500;
+  }
+}

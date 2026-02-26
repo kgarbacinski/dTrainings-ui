@@ -1,0 +1,82 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.confirm-dialog {
+  &__overlay {
+    @include modal-overlay;
+  }
+
+  &__content {
+    background: $bg-modal;
+    color: $text-primary;
+    padding: $space-2xl;
+    border-radius: $radius-lg;
+    width: 90%;
+    max-width: 380px;
+    border: 1px solid $border-color;
+    box-shadow: $shadow-lg;
+    animation: confirmSlideIn $transition-base;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    margin-bottom: $space-sm;
+  }
+
+  &__message {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    line-height: 1.5;
+    margin-bottom: $space-xl;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $space-sm;
+  }
+
+  &__confirm {
+    @include button-danger;
+    flex: 1;
+    padding: $space-sm $space-lg;
+    background: $danger;
+    color: #fff;
+    border: 1px solid $danger;
+
+    &:hover {
+      background: $danger-hover;
+    }
+  }
+
+  &__cancel {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: $text-secondary;
+    border: 1px solid $border-color;
+    border-radius: $radius-pill;
+    padding: $space-sm $space-lg;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: border-color $transition-fast, color $transition-fast;
+
+    &:hover {
+      border-color: $text-muted;
+      color: $text-primary;
+    }
+  }
+}
+
+@keyframes confirmSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

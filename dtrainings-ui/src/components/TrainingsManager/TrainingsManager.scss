@@ -48,14 +48,41 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: $space-2xl;
+    gap: $space-md;
 
     h1 {
       font-size: $font-size-xl;
       font-weight: 600;
+      white-space: nowrap;
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
     }
 
     .create-training-btn {
       @include button-primary;
+      white-space: nowrap;
+    }
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      align-items: stretch;
+
+      &__actions {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .trainings-search {
+    @include form-input;
+    width: 220px;
+
+    @include respond-to(sm) {
+      width: 100%;
     }
   }
 

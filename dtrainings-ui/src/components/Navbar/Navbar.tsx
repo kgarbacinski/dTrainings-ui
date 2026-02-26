@@ -30,6 +30,9 @@ const Navbar = () => {
                 <li className={`navbar__nav-item ${isActive('/trainings-manager') ? 'navbar__nav-item--active' : ''}`}>
                     <Link to="/trainings-manager" onClick={() => setMenuOpen(false)}>Trainings</Link>
                 </li>
+                <li className={`navbar__nav-item ${isActive('/stats') ? 'navbar__nav-item--active' : ''}`}>
+                    <Link to="/stats" onClick={() => setMenuOpen(false)}>Stats</Link>
+                </li>
             </ul>
 
             <div className={`navbar__actions ${menuOpen ? 'navbar__actions--open' : ''}`}>
